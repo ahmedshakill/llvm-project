@@ -3757,6 +3757,21 @@ bool SelectionDAGLegalize::ExpandNode(SDNode *Node) {
     }
     break;
   }
+  case ISD::MOD:{
+    EVT VT = Node->getValueType(0);
+    SDLoc dl(Node);
+    SDValue Dividend = Node->getOperand(0);
+    SDValue Divisor = Node->getOperand(1);
+
+    /*We are doing signed division */
+    if(TLI.isOperationLegalOrCustom(ISD::SDIV,VT)){
+      SDValue Divide = DAG.getNode(ISD::SDIV,dl,VT, Dividend, Divisor);
+      SDValue Mul = DAG.getNode(ISD::MUL, dl, VT, Divide, Divisor);
+      SDValue Result = DAG.getNode(ISD::SUB, dl, VT, Dividend, Mul);
+      Results.push_back(Result);
+    }
+    break;
+  }
   case ISD::MULHU:
   case ISD::MULHS: {
     unsigned ExpandOpcode =

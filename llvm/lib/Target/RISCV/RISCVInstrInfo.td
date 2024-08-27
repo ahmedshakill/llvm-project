@@ -663,6 +663,8 @@ def SRAI : Shift_ri<0b01000, 0b101, "srai">;
 
 def ADD  : ALU_rr<0b0000000, 0b000, "add", Commutable=1>,
            Sched<[WriteIALU, ReadIALU, ReadIALU]>;
+def MOD  : ALU_rr<0b0010000, 0b000, "mod">,
+           Sched<[WriteIALU, ReadIALU, ReadIALU]>;
 def SUB  : ALU_rr<0b0100000, 0b000, "sub">,
            Sched<[WriteIALU, ReadIALU, ReadIALU]>;
 def SLL  : ALU_rr<0b0000000, 0b001, "sll">,
@@ -1013,6 +1015,8 @@ def : InstAlias<"sw $rs2, (${rs1})",
 
 def : InstAlias<"add $rd, $rs1, $imm12",
                 (ADDI  GPR:$rd, GPR:$rs1, simm12:$imm12)>;
+// def : InstAlias<"mod $rd, $rs1, $rs2",
+//                 (MOD GPR:$rd, GPR:$rs1, GPR:$rs2)>;
 def : InstAlias<"and $rd, $rs1, $imm12",
                 (ANDI  GPR:$rd, GPR:$rs1, simm12:$imm12)>;
 def : InstAlias<"xor $rd, $rs1, $imm12",
@@ -1239,6 +1243,7 @@ def : PatGprGpr<add, ADD>;
 def : PatGprSimm12<add, ADDI>;
 def : PatGprGpr<sub, SUB>;
 def : PatGprGpr<or, OR>;
+def : PatGprGpr<mod, MOD>;
 def : PatGprSimm12<or, ORI>;
 def : PatGprGpr<and, AND>;
 def : PatGprSimm12<and, ANDI>;
@@ -1949,6 +1954,7 @@ def : Pat<(sext GPR:$src), (ADDIW GPR:$src, 0)>;
 def : Pat<(trunc GPR:$src), (COPY GPR:$src)>;
 
 def : PatGprGpr<add, ADDW, i32, i32>;
+// def : PatGprGpr<mod, MOD, i32, i32>;
 def : PatGprGpr<sub, SUBW, i32, i32>;
 def : PatGprGpr<and, AND, i32, i32>;
 def : PatGprGpr<or, OR, i32, i32>;
@@ -1959,6 +1965,8 @@ def : PatGprGpr<shiftopw<sra>, SRAW, i32, i64>;
 
 def : Pat<(i32 (add GPR:$rs1, simm12i32:$imm)),
           (ADDIW GPR:$rs1, (i64 (as_i64imm $imm)))>;
+// def : Pat<(i32 (mod GPR:$rs1, GPR:$rs2)),
+//           (MOD GPR:$rs1, GPR:$rs2)>;
 def : Pat<(i32 (and GPR:$rs1, simm12i32:$imm)),
           (ANDI GPR:$rs1, (i64 (as_i64imm $imm)))>;
 def : Pat<(i32 (or GPR:$rs1, simm12i32:$imm)),

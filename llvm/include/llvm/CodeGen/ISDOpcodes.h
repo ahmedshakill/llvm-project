@@ -238,6 +238,7 @@ enum NodeType {
 
   /// Simple integer binary arithmetic operators.
   ADD,
+  MOD,
   SUB,
   MUL,
   SDIV,
