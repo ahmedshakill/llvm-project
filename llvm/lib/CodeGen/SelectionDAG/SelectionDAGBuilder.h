@@ -542,6 +542,7 @@ private:
   void visitBinary(const User &I, unsigned Opcode);
   void visitShift(const User &I, unsigned Opcode);
   void visitAdd(const User &I)  { visitBinary(I, ISD::ADD); }
+  void visitMod(const User &I)  { visitBinary(I, ISD::MOD); }
   void visitFAdd(const User &I) { visitBinary(I, ISD::FADD); }
   void visitSub(const User &I)  { visitBinary(I, ISD::SUB); }
   void visitFSub(const User &I) { visitBinary(I, ISD::FSUB); }

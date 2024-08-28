@@ -762,6 +762,8 @@ public:
     Xchg,
     /// *p = old + v
     Add,
+    /// *p = old - (old/v)*v
+    Mod,
     /// *p = old - v
     Sub,
     /// *p = old & v

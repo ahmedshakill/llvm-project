@@ -485,6 +485,9 @@ private:
   bool translateSRem(const User &U, MachineIRBuilder &MIRBuilder) {
     return translateBinaryOp(TargetOpcode::G_SREM, U, MIRBuilder);
   }
+  bool translateMod(const User &U, MachineIRBuilder &MIRBuilder){
+    return translateBinaryOp(TargetOpcode::G_MOD, U, MIRBuilder);
+  }
   bool translateIntToPtr(const User &U, MachineIRBuilder &MIRBuilder) {
     return translateCast(TargetOpcode::G_INTTOPTR, U, MIRBuilder);
   }

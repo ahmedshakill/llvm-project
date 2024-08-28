@@ -739,6 +739,7 @@ const char *Instruction::getOpcodeName(unsigned OpCode) {
   case URem: return "urem";
   case SRem: return "srem";
   case FRem: return "frem";
+  case Mod: return "mod";
 
   // Logical operators...
   case And: return "and";
