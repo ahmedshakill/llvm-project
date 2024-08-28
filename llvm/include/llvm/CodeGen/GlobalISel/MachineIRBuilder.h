@@ -1641,23 +1641,6 @@ public:
     return buildInstr(TargetOpcode::G_ADD, {Dst}, {Src0, Src1}, Flags);
   }
 
-  /// Build and insert \p Res = G_MOD \p Op0, \p Op1
-  ///
-  /// G_SUB sets \p Res to the difference of integer parameters \p Op0 and
-  /// \p Op1, truncated to their width.
-  ///
-  /// \pre setBasicBlock or setMI must have been called.
-  /// \pre \p Res, \p Op0 and \p Op1 must be generic virtual registers
-  ///      with the same (scalar or vector) type).
-  ///
-  /// \return a MachineInstrBuilder for the newly created instruction.
-
-  MachineInstrBuilder buildMod(const DstOp &Dst, const SrcOp &Src0,
-                               const SrcOp &Src1,
-                               std::optional<unsigned> Flags = std::nullopt) {
-    return buildInstr(TargetOpcode::G_MOD, {Dst}, {Src0, Src1}, Flags);
-  }
-
   /// Build and insert \p Res = G_SUB \p Op0, \p Op1
   ///
   /// G_SUB sets \p Res to the difference of integer parameters \p Op0 and

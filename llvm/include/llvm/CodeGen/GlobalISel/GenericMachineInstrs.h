@@ -641,7 +641,6 @@ public:
     switch (MI->getOpcode()) {
     // Integer.
     case TargetOpcode::G_ADD:
-    case TargetOpcode::G_MOD:
     case TargetOpcode::G_SUB:
     case TargetOpcode::G_MUL:
     case TargetOpcode::G_SDIV:
