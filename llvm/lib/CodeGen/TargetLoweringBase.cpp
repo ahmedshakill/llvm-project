@@ -1927,7 +1927,6 @@ int TargetLoweringBase::InstructionOpcodeToISD(unsigned Opcode) const {
   case CleanupPad:     return 0;
   case FNeg:           return ISD::FNEG;
   case Add:            return ISD::ADD;
-  case Mod:            return ISD::MOD;
   case FAdd:           return ISD::FADD;
   case Sub:            return ISD::SUB;
   case FSub:           return ISD::FSUB;
