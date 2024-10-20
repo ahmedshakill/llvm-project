@@ -1,6 +1,7 @@
 #ifndef RV32I_TARGET_MACHINE_H
 #define RV32I_TARGET_MACHINE_H
 
+#include "llvm/CodeGen/TargetPassConfig.h"
 #include "llvm/Target/TargetMachine.h"
 #include <optional>
 
@@ -13,6 +14,7 @@ namespace llvm {
                        std::optional<CodeModel::Model> CM, CodeGenOptLevel OL,
                        bool JIT);
     ~RV32ITargetMachine(){}
+  TargetPassConfig *createPassConfig(PassManagerBase &PM) override;
 };
 } // namespace llvm
 

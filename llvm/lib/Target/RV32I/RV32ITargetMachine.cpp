@@ -1,7 +1,8 @@
 #include "RV32ITargetMachine.h"
-#include "llvm/MC/TargetRegistry.h"
-#include "llvm/Support/CodeGen.h"
-#include "llvm/Target/TargetMachine.h"
+#include "RV32IDAGToDAGISel.h"
+#include "llvm/IR/LegacyPassManager.h"
+#include <llvm/CodeGen/TargetPassConfig.h>
+#include <llvm/MC/TargetRegistry.h>
 
 using namespace llvm;
 
@@ -22,3 +23,25 @@ RV32ITargetMachine::RV32ITargetMachine(Target const &T,   Triple const &TT, Stri
                         getEffectiveCodeModel(CM, CodeModel::Small), OL) {
   initAsmInfo();
 }
+
+class RV32IPassConfig : public TargetPassConfig {
+public:
+  RV32IPassConfig(RV32ITargetMachine &TM, legacy::PassManagerBase &PM)
+    : TargetPassConfig(TM, PM) {}
+
+  bool addInstSelector() override {
+    addPass(new RV32IDAGToDAGISelPass(getTM<RV32ITargetMachine>()));
+    return false;
+  }
+};
+
+TargetPassConfig *RV32ITargetMachine::createPassConfig(PassManagerBase &PM) {
+  return new RV32IPassConfig(*this, PM);
+}
+
+
+
+
+
+
+
