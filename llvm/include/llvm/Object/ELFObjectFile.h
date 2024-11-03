@@ -1285,6 +1285,8 @@ StringRef ELFObjectFile<ELFT>::getFileFormatName() const {
     switch (EF.getHeader().e_machine) {
     case ELF::EM_68K:
       return "elf32-m68k";
+    case ELF::EM_88K:
+      return "elf32-m88k";
     case ELF::EM_386:
       return "elf32-i386";
     case ELF::EM_IAMCU:
@@ -1361,6 +1363,8 @@ template <class ELFT> Triple::ArchType ELFObjectFile<ELFT>::getArch() const {
   switch (EF.getHeader().e_machine) {
   case ELF::EM_68K:
     return Triple::m68k;
+  case ELF::EM_88K:
+    return Triple::m88k;
   case ELF::EM_386:
   case ELF::EM_IAMCU:
     return Triple::x86;

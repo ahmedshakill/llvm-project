@@ -61,6 +61,7 @@ public:
     loongarch32,    // LoongArch (32-bit): loongarch32
     loongarch64,    // LoongArch (64-bit): loongarch64
     m68k,           // M68k: Motorola 680x0 family
+    m88k,           // M88k: Motorola 880x0 family
     mips,           // MIPS: mips, mipsallegrex, mipsr6
     mipsel,         // MIPSEL: mipsel, mipsallegrexe, mipsr6el
     mips64,         // MIPS64: mips64, mips64r6, mipsn32, mipsn32r6
@@ -969,7 +970,9 @@ public:
   bool isMIPS64() const {
     return getArch() == Triple::mips64 || getArch() == Triple::mips64el;
   }
-
+  bool isM88k() const {
+    return getArch() == Triple::m88k;
+  }
   /// Tests whether the target is MIPS (little and big endian, 32- or 64-bit).
   bool isMIPS() const {
     return isMIPS32() || isMIPS64();

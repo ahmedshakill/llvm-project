@@ -444,6 +444,8 @@ std::optional<StringRef> ELFObjectFileBase::tryGetCPUName() const {
     return StringRef("future");
   case ELF::EM_BPF:
     return StringRef("v4");
+  case ELF::EM_88K:
+    return StringRef(getPlatformFlags() & ELF::EF_88K_M88110 ? "mc88110" : "mc88100");
   default:
     return std::nullopt;
   }

@@ -31,6 +31,13 @@ StringRef llvm::object::getELFRelocationTypeName(uint32_t Machine,
       break;
     }
     break;
+  case ELF::EM_88K:
+    switch (Type) {
+#include "llvm/BinaryFormat/ELFRelocs/M88k.def"
+    default:
+      break;
+    }
+    break;
   case ELF::EM_X86_64:
     switch (Type) {
 #include "llvm/BinaryFormat/ELFRelocs/x86_64.def"
