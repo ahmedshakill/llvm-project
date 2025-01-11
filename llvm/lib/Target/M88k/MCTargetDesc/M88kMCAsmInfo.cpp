@@ -6,7 +6,7 @@ using namespace llvm;
 
 llvm::M88kMCAsmInfo::M88kMCAsmInfo(const Triple &TT){
   IsLittleEndian = false;
-  UseDotAlignForAlignment = true;
+  //UseDotAlignForAlignment = true;
   MinInstAlignment = 4;
   CommentString = "|";
 
